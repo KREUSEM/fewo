@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kontakt & Buchung | Ferienwohnung Ötigheim</title>
+  <meta name="description" content="Kontaktieren Sie uns direkt für Buchungen, Fragen und Konditionen in der Ferienwohnung Ötigheim." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://kreusem.github.io/fewo/kontakt-buchung.html" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="index.html">Ferienwohnung Ötigheim</a>
+      <button class="nav-toggle" type="button" aria-label="Menü öffnen" aria-expanded="false">☰</button>
+      <nav class="site-nav">
+        <a href="index.html">Startseite</a>
+        <a href="kontakt-buchung.html" class="active">Kontakt & Buchung</a>
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero-small">
+      <div class="container narrow">
+        <p class="eyebrow">Kontakt & Buchung</p>
+        <h1>Kontaktieren Sie uns direkt für die besten Konditionen.</h1>
+        <p>Nutzen Sie das Formular für Ihre Direktanfrage. Wir melden uns schnellstmöglich bei Ihnen.</p>
+      </div>
+    </section>
+
+    <section class="section section-light">
+      <div class="container grid-1">
+        <article class="card contact-card">
+          <h2>Ihre direkte Buchungsanfrage</h2>
+          <form id="contactForm" class="contact-form" action="https://splitforms.com/api/submit" method="POST">
+            <input type="hidden" name="access_key" value="c5083266f48d4df5bf8ff9ac51ac7459">
+            <input type="hidden" name="subject" value="New contact form submission">
+
+            <div class="form-field">
+              <label for="name">Name *</label>
+              <input id="name" type="text" name="name" placeholder="Max Mustermann" required>
+            </div>
+
+            <div class="form-field">
+              <label for="email">E-Mail *</label>
+              <input id="email" type="email" name="email" placeholder="max@mustermann.de" required>
+            </div>
+
+            <div class="form-field">
+              <label for="phone">Telefon (optional)</label>
+              <input id="phone" type="tel" name="phone" placeholder="+49 1234 567890">
+            </div>
+
+            <div class="form-field">
+              <label for="message">Nachricht *</label>
+              <textarea id="message" name="message" placeholder="Bitte tragen Sie hier Ihre Reisedaten ein. Anreise / Abreise / Anzahl Personen" required></textarea>
+            </div>
+
+            <!-- honeypot — bots fill every field -->
+            <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
+
+            <button class="btn btn-primary" type="submit">Send</button>
+            <p id="formStatus" class="form-status" aria-live="polite"></p>
+          </form>
+          <p class="splitforms-attribution" style="margin-top:12px;font-size:11px;color:#888;text-align:right">
+            Powered by <a href="https://splitforms.com" style="color:#888;text-decoration:none" target="_blank" rel="sponsored noopener">splitforms</a>
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section section-light">
+      <div class="container grid-1">
+        <div class="card contact-card">
+          <h2>Alternativ per E-Mail</h2>
+          <p>Senden Sie uns einfach eine E-Mail an <a href="mailto:fewo-oetigheim@web.de" title="E-Mail an fewo-oetigheim@web.de" aria-label="E-Mail an fewo-oetigheim@web.de senden">fewo-oetigheim@web.de</a>.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-light">
+      <div class="container grid-1">
+        <div class="section-heading">
+          <p class="eyebrow">Online Buchung</p>
+          <h2>Buchen Sie online für sofortige Reservierung.</h2>
+          <p class="form-note"><em>Bei Online-Buchung fallen zusätzliche Gebühren an.</em></p>
+        </div>
+        <div style="width: 100%; max-width: 1280px; margin: 0 auto;">
+          <iframe
+            id="host-websites-booking-module"
+            style="aspect-ratio: 1280 / 1000; width: 100%; min-height: 500px; height: 500px; border: none;"
+            src="https://widget.holiduhost.com/widget/484166c8-bfda-4ad6-99e2-b4305aa237f4">
+          </iframe>
+        </div>
+        <script>
+          window.addEventListener('message', function(event) {
+            if (event.data && event.data.type === 'resize') {
+              const iframe = document.getElementById('host-websites-booking-module');
+              if (iframe) {
+                iframe.style.height = event.data.height + 'px';
+              }
+            }
+          });
+        </script>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <a href="index.html">Startseite</a>
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <p>© <span id="year"></span> Ferienwohnung Ötigheim. Alle Rechte vorbehalten.</p>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>
