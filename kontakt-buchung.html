@@ -57,7 +57,14 @@
 
             <div class="form-field">
               <label for="message">Nachricht *</label>
-              <textarea id="message" name="message" placeholder="Bitte tragen Sie hier Ihre Reisedaten ein. Anreise / Abreise / Anzahl Personen" required></textarea>
+              <textarea id="message" name="message" placeholder="Bitte tragen Sie hier Ihre Reisedaten ein. Anreise / Abreise / Anzahl Personen." required></textarea>
+            </div>
+
+            <div class="form-field consent-field">
+              <label for="privacyConsent" class="consent-label">
+                <input id="privacyConsent" type="checkbox" name="privacyConsent" required>
+                <span>Ich habe die <a href="datenschutz.html" target="_blank" rel="noopener noreferrer">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner Daten gemäß dieser Erklärung zu.</span>
+              </label>
             </div>
 
             <!-- honeypot — bots fill every field -->
@@ -122,8 +129,26 @@
     </div>
     <div class="container footer-bottom">
       <p>© <span id="year"></span> Ferienwohnung Ötigheim. Alle Rechte vorbehalten.</p>
+      <div class="analytics-banner" aria-live="polite">
+        <span id="analyticsStatus">Web-Analyse ist aktiviert.</span>
+        <button id="analyticsToggle" class="btn btn-secondary" type="button">Analytics deaktivieren</button>
+      </div>
     </div>
   </footer>
+
+  <script>
+  (function(){
+    if (!localStorage.getItem('disable-analytics')) {
+      var s = document.createElement('script');
+      s.defer = true;
+      s.src = 'https://cloud.umami.is/script.js';
+      s.setAttribute('data-website-id','9b1ff5c5-32f0-4c4b-9297-1d6f45581b03');
+      document.head.appendChild(s);
+    }
+    window.disableAnalytics = function(){ localStorage.setItem('disable-analytics','true'); location.reload(); };
+    window.enableAnalytics = function(){ localStorage.removeItem('disable-analytics'); location.reload(); };
+  })();
+  </script>
 
   <script src="assets/js/main.js" defer></script>
 </body>

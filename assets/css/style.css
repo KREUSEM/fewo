@@ -248,6 +248,31 @@ h2 { font-size: clamp(1.5rem, 3vw, 2rem); }
   color: white;
 }
 .btn-primary:hover { background: var(--primary-dark); text-decoration: none; }
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.35);
+}
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+.analytics-banner {
+  margin-top: 1rem;
+  padding: 0.95rem 1rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255,255,255,0.16);
+  border-radius: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.95rem;
+  color: #f8fafc;
+}
+.analytics-banner span { flex: 1 1 220px; min-width: 0; }
+@media (max-width: 680px) {
+  .analytics-banner { flex-direction: column; align-items: stretch; }
+}
 .check-list {
   padding-left: 1.1rem;
   margin: 1rem 0 0;
@@ -266,6 +291,12 @@ h2 { font-size: clamp(1.5rem, 3vw, 2rem); }
 .contact-form button { margin: 0; }
 .form-field { display: grid; gap: 0.4rem; }
 .form-field label { font-weight: 700; }
+.consent-field { display: flex; align-items: center; }
+.consent-label { display: flex; align-items: center; gap: 12px; font-weight: 400; width: 100%; }
+/* Ensure checkbox sizing overrides the generic .form-field input width */
+.consent-label input[type="checkbox"] { margin: 0; width: 18px; height: 18px; flex: 0 0 auto; }
+/* Allow the label text to wrap so it remains visible on narrow viewports */
+.consent-label span { display: block; flex: 1 1 auto; white-space: normal; overflow: visible; text-overflow: clip; }
 .form-field input,
 .form-field textarea {
   width: 100%;

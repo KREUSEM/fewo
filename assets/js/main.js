@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const name = document.getElementById('name').value.trim();
       const email = document.getElementById('email').value.trim();
       const message = document.getElementById('message').value.trim();
+      const privacyConsent = document.getElementById('privacyConsent');
 
       if (!name || !email || !message) {
         event.preventDefault();
@@ -31,6 +32,13 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!emailValid) {
         event.preventDefault();
         formStatus.textContent = 'Bitte geben Sie eine gültige E-Mail-Adresse ein.';
+        formStatus.className = 'form-status error';
+        return;
+      }
+
+      if (!privacyConsent || !privacyConsent.checked) {
+        event.preventDefault();
+        formStatus.textContent = 'Bitte bestätigen Sie die Datenschutzerklärung.';
         formStatus.className = 'form-status error';
         return;
       }
@@ -116,5 +124,32 @@ document.addEventListener('DOMContentLoaded', () => {
         showNextImage();
       }
     });
+  }
+
+  const analyticsStatus = document.getElementById('analyticsStatus');
+  const analyticsToggle = document.getElementById('analyticsToggle');
+  if (analyticsStatus && analyticsToggle) {
+    const analyticsDisabled = !!localStorage.getItem('disable-analytics');
+    const updateAnalyticsBanner = () => {
+      const disabled = !!localStorage.getItem('disable-analytics');
+      analyticsStatus.textContent = disabled
+        ? 'Web-Analyse ist deaktiviert.'
+        : 'Web-Analyse ist aktiviert.';
+      analyticsToggle.textContent = disabled
+        ? 'Analytics aktivieren'
+        : 'Analytics deaktivieren';
+    };
+
+    analyticsToggle.addEventListener('click', () => {
+      if (localStorage.getItem('disable-analytics')) {
+        localStorage.removeItem('disable-analytics');
+      } else {
+        localStorage.setItem('disable-analytics', 'true');
+      }
+      updateAnalyticsBanner();
+      setTimeout(() => location.reload(), 200);
+    });
+
+    updateAnalyticsBanner();
   }
 });

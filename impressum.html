@@ -37,7 +37,7 @@
         <p><strong>Kreuser FeWo GbR</strong><br />vertretungsberechtigte Gesellschafter: Martin Kreuser und Manuela Kreuser<br />Finkenweg 10<br />76470 Ötigheim</p>
         <p>Telefon: <a href="tel:+4916095800905">+49 (0) 160 95 800 905</a><br />E-Mail: <a href="mailto:fewo-oetigheim@web.de">fewo-oetigheim@web.de</a></p>
         <p>Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz: DE319248947</p>
-        <p>Redaktionell verantwortlich: Martin Kreuser und Manuela Kreuser, Finkenweg 10, 76470 Ötigheim</p>
+        <p>Verantwortlich für den Inhalt gemäß § 55 Abs. 2 RStV: Martin Kreuser und Manuela Kreuser, Finkenweg 10, 76470 Ötigheim</p>
         <p>Online-Streitbeilegung: <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener noreferrer">https://ec.europa.eu/consumers/odr</a></p>
         <p>Wir sind nicht verpflichtet und grundsätzlich nicht bereit, an einem Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
       </div>
@@ -55,8 +55,26 @@
     </div>
     <div class="container footer-bottom">
       <p>© <span id="year"></span> Ferienwohnung Ötigheim. Alle Rechte vorbehalten.</p>
+      <div class="analytics-banner" aria-live="polite">
+        <span id="analyticsStatus">Web-Analyse ist aktiviert.</span>
+        <button id="analyticsToggle" class="btn btn-secondary" type="button">Analytics deaktivieren</button>
+      </div>
     </div>
   </footer>
+
+  <script>
+  (function(){
+    if (!localStorage.getItem('disable-analytics')) {
+      var s = document.createElement('script');
+      s.defer = true;
+      s.src = 'https://cloud.umami.is/script.js';
+      s.setAttribute('data-website-id','9b1ff5c5-32f0-4c4b-9297-1d6f45581b03');
+      document.head.appendChild(s);
+    }
+    window.disableAnalytics = function(){ localStorage.setItem('disable-analytics','true'); location.reload(); };
+    window.enableAnalytics = function(){ localStorage.removeItem('disable-analytics'); location.reload(); };
+  })();
+  </script>
 
   <script src="assets/js/main.js" defer></script>
 </body>
