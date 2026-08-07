@@ -136,8 +136,8 @@ document.addEventListener('DOMContentLoaded', () => {
         ? 'Web-Analyse ist deaktiviert.'
         : 'Web-Analyse ist aktiviert.';
       analyticsToggle.textContent = disabled
-        ? 'Analytics aktivieren'
-        : 'Analytics deaktivieren';
+        ? 'Aktivieren'
+        : 'Deaktivieren';
     };
 
     analyticsToggle.addEventListener('click', () => {
