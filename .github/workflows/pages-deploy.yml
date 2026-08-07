@@ -1,0 +1,68 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  pages-deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Prepare Pages artifact
+        run: |
+          mkdir -p public
+          cp -R ./* public/
+          if [ -f .nojekyll ]; then cp .nojekyll public/; fi
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: ./public
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v1
+
+      - name: Wait for GitHub Pages build to finish (poll)
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const maxWaitMs = 30 * 60 * 1000; // 30 minutes
+            const intervalMs = 10 * 1000;     // poll every 10s
+            const start = Date.now();
+
+            async function latestBuild() {
+              const resp = await github.rest.repos.listPagesBuilds({
+                owner,
+                repo,
+                per_page: 1,
+              });
+              return resp.data && resp.data[0];
+            }
+
+            while (Date.now() - start < maxWaitMs) {
+              const build = await latestBuild();
+              if (!build) {
+                core.info("No Pages build found yet; sleeping...");
+              } else {
+                core.info(`Pages build id=${build.id} status=${build.status}`);
+                if (build.status === "built") {
+                  core.info("Pages build succeeded.");
+                  return;
+                }
+                if (build.status === "errored") {
+                  throw new Error(`Pages build errored (id=${build.id}). See Settings → Pages → Deployment details for logs.`);
+                }
+              }
+              await new Promise((resolve) => setTimeout(resolve, intervalMs));
+            }
+            throw new Error("Timed out waiting for GitHub Pages build to complete (poll).");
