@@ -48,8 +48,19 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  const heroImage = document.querySelector('.hero-visual img');
   const galleryImages = Array.from(document.querySelectorAll('.gallery-card img'));
+  const allLightboxImages = [];
+
+  if (heroImage) {
+    allLightboxImages.push(heroImage);
+  }
+
   if (galleryImages.length) {
+    allLightboxImages.push(...galleryImages);
+  }
+
+  if (allLightboxImages.length) {
     let currentIndex = 0;
     const lightbox = document.createElement('div');
     lightbox.className = 'lightbox-overlay';
@@ -71,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const lightboxNext = lightbox.querySelector('.lightbox-next');
 
     function updateLightbox() {
-      const image = galleryImages[currentIndex];
+      const image = allLightboxImages[currentIndex];
       lightboxImage.src = image.src;
       lightboxImage.alt = image.alt || 'Vergrößertes Bild';
       lightboxCaption.textContent = image.alt || '';
@@ -91,16 +102,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function showPreviousImage() {
-      currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+      currentIndex = (currentIndex - 1 + allLightboxImages.length) % allLightboxImages.length;
       updateLightbox();
     }
 
     function showNextImage() {
-      currentIndex = (currentIndex + 1) % galleryImages.length;
+      currentIndex = (currentIndex + 1) % allLightboxImages.length;
       updateLightbox();
     }
 
-    galleryImages.forEach((img, index) => {
+    allLightboxImages.forEach((img, index) => {
       img.addEventListener('click', () => openLightbox(index));
     });
 

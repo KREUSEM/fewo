@@ -95,6 +95,25 @@ h2 { font-size: clamp(1.5rem, 3vw, 2rem); }
 .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .section { padding: 2.25rem 0; }
 .section-light { background: #fff; }
+.location-layout {
+  align-items: stretch;
+}
+.location-layout > .content-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 100%;
+}
+.map-card {
+  width: 100%;
+  height: 100%;
+  min-height: 320px;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  background: #e5eef3;
+}
 .card,
 .mini-card,
 .content-card {
@@ -111,6 +130,12 @@ h2 { font-size: clamp(1.5rem, 3vw, 2rem); }
 .hero-visual img {
   border-radius: var(--radius);
   box-shadow: var(--shadow);
+  cursor: zoom-in;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.hero-visual img:hover {
+  transform: scale(1.01);
+  box-shadow: 0 16px 36px rgba(18, 52, 78, 0.16);
 }
 .section-heading {
   margin-bottom: 1rem;
@@ -376,12 +401,14 @@ h2 { font-size: clamp(1.5rem, 3vw, 2rem); }
     width: 100%;
   }
 }
+@media (max-width: 767px) {
   .site-nav {
     position: absolute;
     top: 100%;
     right: 1rem;
     left: 1rem;
     flex-direction: column;
+    align-items: flex-start;
     background: white;
     border: 1px solid var(--border);
     border-radius: 14px;
