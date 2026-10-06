@@ -66,6 +66,27 @@ img { max-width: 100%; display: block; }
   border-radius: 10px;
   padding: 0.45rem 0.8rem;
 }
+.language-switch {
+  display: inline-flex;
+  gap: 0.25rem;
+}
+.language-toggle {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--primary-dark);
+  padding: 0.45rem 0.7rem;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+.language-toggle:hover { border-color: var(--primary); color: var(--primary); }
+.language-toggle[aria-pressed="true"] {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+}
 .hero {
   padding: 3.5rem 0 2.3rem;
   background: linear-gradient(135deg, #e9f3f8, #f8f4eb);
