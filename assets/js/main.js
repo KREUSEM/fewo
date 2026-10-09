@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
+  const i18n = window.siteI18n;
+  const t = (key) => i18n ? i18n.t(key) : key;
   const yearNode = document.getElementById('year');
   if (yearNode) yearNode.textContent = new Date().getFullYear();
 
@@ -9,6 +11,14 @@ document.addEventListener('DOMContentLoaded', () => {
       const expanded = navToggle.getAttribute('aria-expanded') === 'true';
       navToggle.setAttribute('aria-expanded', String(!expanded));
       siteNav.classList.toggle('open');
+    });
+  }
+
+  if (i18n) {
+    document.querySelectorAll('.language-toggle').forEach((languageButton) => {
+      languageButton.addEventListener('click', () => {
+        i18n.setLanguage(languageButton.dataset.language);
+      });
     });
   }
 
@@ -23,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (!name || !email || !message) {
         event.preventDefault();
-        formStatus.textContent = 'Bitte füllen Sie alle Felder aus.';
+        formStatus.textContent = t('form.error.required');
         formStatus.className = 'form-status error';
         return;
       }
@@ -31,19 +41,19 @@ document.addEventListener('DOMContentLoaded', () => {
       const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
       if (!emailValid) {
         event.preventDefault();
-        formStatus.textContent = 'Bitte geben Sie eine gültige E-Mail-Adresse ein.';
+        formStatus.textContent = t('form.error.email');
         formStatus.className = 'form-status error';
         return;
       }
 
       if (!privacyConsent || !privacyConsent.checked) {
         event.preventDefault();
-        formStatus.textContent = 'Bitte bestätigen Sie die Datenschutzerklärung.';
+        formStatus.textContent = t('form.error.privacy');
         formStatus.className = 'form-status error';
         return;
       }
 
-      formStatus.textContent = 'Ihre Anfrage wird jetzt gesendet. Vielen Dank!';
+      formStatus.textContent = t('form.success');
       formStatus.className = 'form-status success';
     });
   }
@@ -65,10 +75,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const lightbox = document.createElement('div');
     lightbox.className = 'lightbox-overlay';
     lightbox.innerHTML = `
-      <div class="lightbox-content" role="dialog" aria-modal="true" aria-label="Bildvorschau">
-        <button class="lightbox-close" type="button" aria-label="Bild schließen">×</button>
-        <button class="lightbox-nav lightbox-prev" type="button" aria-label="Vorheriges Bild">←</button>
-        <button class="lightbox-nav lightbox-next" type="button" aria-label="Nächstes Bild">→</button>
+      <div class="lightbox-content" role="dialog" aria-modal="true" aria-label="">
+        <button class="lightbox-close" type="button" aria-label="">×</button>
+        <button class="lightbox-nav lightbox-prev" type="button" aria-label="">←</button>
+        <button class="lightbox-nav lightbox-next" type="button" aria-label="">→</button>
         <img src="" alt="" />
         <p class="lightbox-caption"></p>
       </div>
@@ -80,11 +90,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const lightboxClose = lightbox.querySelector('.lightbox-close');
     const lightboxPrev = lightbox.querySelector('.lightbox-prev');
     const lightboxNext = lightbox.querySelector('.lightbox-next');
+    lightbox.querySelector('.lightbox-content').setAttribute('aria-label', t('lightbox.label'));
+    lightboxClose.setAttribute('aria-label', t('lightbox.close'));
+    lightboxPrev.setAttribute('aria-label', t('lightbox.previous'));
+    lightboxNext.setAttribute('aria-label', t('lightbox.next'));
 
     function updateLightbox() {
       const image = allLightboxImages[currentIndex];
       lightboxImage.src = image.src;
-      lightboxImage.alt = image.alt || 'Vergrößertes Bild';
+      lightboxImage.alt = image.alt || t('lightbox.enlarged');
       lightboxCaption.textContent = image.alt || '';
     }
 
@@ -144,11 +158,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const updateAnalyticsBanner = () => {
       const disabled = !!localStorage.getItem('disable-analytics');
       analyticsStatus.textContent = disabled
-        ? 'Web-Analyse ist deaktiviert.'
-        : 'Web-Analyse ist aktiviert.';
+        ? t('analytics.disabled')
+        : t('analytics.enabled');
       analyticsToggle.textContent = disabled
-        ? 'Aktivieren'
-        : 'Deaktivieren';
+        ? t('analytics.enable')
+        : t('analytics.disable');
     };
 
     analyticsToggle.addEventListener('click', () => {
