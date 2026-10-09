@@ -5,8 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Datenschutzerklärung | Ferienwohnung Ötigheim</title>
   <meta name="description" content="Datenschutzerklärung der Ferienwohnung Ötigheim mit Infos zu Datenschutz, Cookies und Kontaktformular." />
+  <meta property="og:title" content="Datenschutzerklärung | Ferienwohnung Ötigheim" />
+  <meta property="og:description" content="Datenschutzerklärung der Ferienwohnung Ötigheim mit Infos zu Datenschutz, Cookies und Kontaktformular." />
+  <meta property="og:image" content="https://www.fewo-oetigheim.de/assets/img/Wonhzimmer_TV_Schlafcouch.jpg" />
+  <meta property="og:url" content="https://www.fewo-oetigheim.de/datenschutz.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="de_DE" />
+  <meta property="og:locale:alternate" content="en_GB" />
   <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://kreusem.github.io/fewo/datenschutz.html" />
+  <link rel="canonical" href="https://www.fewo-oetigheim.de/datenschutz.html" />
+  <link rel="alternate" hreflang="de-DE" href="https://www.fewo-oetigheim.de/datenschutz.html" />
+  <link rel="alternate" hreflang="en-GB" href="https://www.fewo-oetigheim.de/en/privacy-policy.html" />
+  <link rel="alternate" hreflang="x-default" href="https://www.fewo-oetigheim.de/datenschutz.html" />
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
@@ -22,8 +32,8 @@
         <a href="datenschutz.html" class="active">Datenschutz</a>
       </nav>
       <div class="language-switch" role="group" aria-label="Sprachauswahl">
-        <button class="language-toggle" type="button" lang="de" aria-label="Deutsch" aria-pressed="true" data-language="de">DE</button>
-        <button class="language-toggle" type="button" lang="en" aria-label="English" aria-pressed="false" data-language="en">EN</button>
+        <a class="language-toggle" lang="de" aria-label="Deutsch" aria-current="page" href="/datenschutz.html">DE</a>
+        <a class="language-toggle" lang="en" aria-label="English" href="/en/privacy-policy.html">EN</a>
       </div>
     </div>
   </header>
@@ -92,13 +102,11 @@
 
   <script>
   (function(){
-    var UMAMI_URL = 'https://analytics.example.com'; // <-- set your Umami Cloud URL (no trailing slash)
-    var WEBSITE_ID = 'YOUR_WEBSITE_ID'; // <-- set your Umami website id
     if (!localStorage.getItem('disable-analytics')) {
       var s = document.createElement('script');
-      s.async = true; s.defer = true;
-      s.setAttribute('data-website-id', WEBSITE_ID);
-      s.src = UMAMI_URL + '/umami.js';
+      s.defer = true;
+      s.src = 'https://eu.umami.is/script.js';
+      s.setAttribute('data-website-id','9b1ff5c5-32f0-4c4b-9297-1d6f45581b03');
       document.head.appendChild(s);
     }
     window.disableAnalytics = function(){ localStorage.setItem('disable-analytics','true'); location.reload(); };
