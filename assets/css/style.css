@@ -71,6 +71,9 @@ img { max-width: 100%; display: block; }
   gap: 0.25rem;
 }
 .language-toggle {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
   border: 1px solid var(--border);
   border-radius: 999px;
   background: var(--surface);
@@ -82,7 +85,13 @@ img { max-width: 100%; display: block; }
   cursor: pointer;
 }
 .language-toggle:hover { border-color: var(--primary); color: var(--primary); }
+.language-toggle:hover { text-decoration: none; }
 .language-toggle[aria-pressed="true"] {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+}
+.language-toggle[aria-current="page"] {
   background: var(--primary);
   border-color: var(--primary);
   color: #fff;

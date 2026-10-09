@@ -14,14 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  if (i18n) {
-    document.querySelectorAll('.language-toggle').forEach((languageButton) => {
-      languageButton.addEventListener('click', () => {
-        i18n.setLanguage(languageButton.dataset.language);
-      });
-    });
-  }
-
   const contactForm = document.getElementById('contactForm');
   const formStatus = document.getElementById('formStatus');
   if (contactForm && formStatus) {

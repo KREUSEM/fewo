@@ -1,7 +1,7 @@
 (function () {
   const entries = {
     'brand.name': ['Ferienwohnung Ötigheim', 'Ötigheim Holiday Apartment'],
-    'meta.home.title': ['Ferienwohnung Ötigheim – Moderne Unterkunft bei Rastatt | Fewo Oetigheim', 'Ötigheim Holiday Apartment – Modern accommodation near Rastatt | Fewo Oetigheim'],
+    'meta.home.title': ['Ferienwohnung Ötigheim bei Rastatt | Fewo Oetigheim', 'Holiday Apartment in Ötigheim near Rastatt | Fewo Oetigheim'],
     'meta.home.description': ['Gemütliche Ferienwohnung in Ötigheim bei Rastatt. Moderne Ausstattung, ruhige Lage, schnelle Buchung. Ideal für Urlaub, Geschäftsreisen und Monteure.', 'Cosy holiday apartment in Ötigheim near Rastatt. Modern amenities, peaceful location and easy booking. Ideal for holidays, business trips and contractors.'],
     'meta.home.og.title': ['Ferienwohnung Ötigheim – Moderne Unterkunft bei Rastatt', 'Ötigheim Holiday Apartment – Modern accommodation near Rastatt'],
     'meta.home.og.description': ['Gemütliche Ferienwohnung in Ötigheim. Moderne Ausstattung, ruhige Lage, schnelle Buchung.', 'Cosy holiday apartment in Ötigheim. Modern amenities, peaceful location and easy booking.'],
@@ -149,16 +149,7 @@
 
   const nodeKeys = new WeakMap();
   const attributeKeys = new WeakMap();
-  const preferredLanguage = (navigator.languages && navigator.languages[0]) || navigator.language || 'de';
-  function readSessionLanguage() {
-    try {
-      const storedLanguage = sessionStorage.getItem('site-language');
-      return storedLanguage === 'de' || storedLanguage === 'en' ? storedLanguage : null;
-    } catch {
-      return null;
-    }
-  }
-  let language = readSessionLanguage() || (/^en(?:-|$)/i.test(preferredLanguage) ? 'en' : 'de');
+  let language = /^en(?:-|$)/i.test(document.documentElement.lang) ? 'en' : 'de';
 
   function translate(key, lang = language) {
     const entry = entries[key];
@@ -174,7 +165,7 @@
   }
 
   function apply(root = document) {
-    document.documentElement.lang = language;
+    document.documentElement.lang = language === 'en' ? 'en-GB' : 'de-DE';
     const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
       acceptNode(node) {
         return node.parentElement && !node.parentElement.closest('script, style, noscript')
@@ -208,19 +199,11 @@
       });
     });
     if (root === document) {
-      document.querySelectorAll('.language-toggle').forEach((languageButton) => {
-        languageButton.setAttribute('aria-pressed', String(languageButton.dataset.language === language));
-      });
     }
   }
 
   function setLanguage(nextLanguage) {
     language = nextLanguage === 'en' ? 'en' : 'de';
-    try {
-      sessionStorage.setItem('site-language', language);
-    } catch {
-      // Keep the language switch usable when browser storage is unavailable.
-    }
     apply();
   }
 
